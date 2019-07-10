@@ -109,6 +109,53 @@ const data = [
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
 
 */
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+  // define new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const firstPara = document.createElement('p');
+  const secondPara = document.createElement('p');
+  const thirdPara = document.createElement('p');
+  const expBtn = document.createElement('span');
+
+  // setup structure of elements
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(firstPara)
+  article.appendChild(secondPara)
+  article.appendChild(thirdPara)
+  article.appendChild(expBtn)
+
+  // set class names
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  expBtn.classList.add('expandButton')
+
+  // fill in content
+  articleTitle.textContent = title
+  articleDate.textContent = date
+  firstPara.textContent = firstParagraph
+  secondPara.textContent = secondParagraph
+  thirdPara.textContent = thirdParagraph
+  expBtn.textContent = 'Expand'
+
+  // add event listener to Expand button
+  expBtn.addEventListener('click', event => {
+    console.log('button clicked');
+    article.classList.add('article-open')
+  })
+
+  return article
+}
+
+data.forEach(element =>{ 
+  document.querySelector('.articles').appendChild(
+    createArticle(element.title, element.date, element.firstParagraph, element.secondParagraph, element.thirdParagraph)
+  );
+  console.log('added article ' + element.title)
+})
